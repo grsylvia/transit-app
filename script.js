@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 const circle = L.circle([42.33129, -71.12641], {
     color: 'green',
     fillColor: '#00843d',
-    fillOpacity: 0.5,
-    radius: 500
+    fillOpacity: 1.0,
+    radius: 100
 }).addTo(map);
 circle.bindPopup("Brookline Hills").openPopup();
