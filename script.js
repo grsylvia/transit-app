@@ -36,7 +36,7 @@ function loadTrainStations(csvData) {
 }
 
 // GitHub CSV URL
-var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/stops.csv';
+var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/stops_rapidtransit.csv';
 
 fetch(csvUrl)
   .then(response => {
