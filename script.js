@@ -6,22 +6,6 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19
 }).addTo(map);
 
-var mbtaicon = L.icon({
-    iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/64/MBTA.svg', 
-    iconSize: [10, 10]
-});
-L.marker([42.33129, -71.12641], {icon: mbtaicon}).addTo(map);
-
-const circle = L.circle([42.33129, -71.12641], {
-    color: 'green',
-    fillColor: '#00843d',
-    fillOpacity: 0.5,
-    radius: 100
-}).addTo(map);
-circle.bindPopup("Brookline Hills").openPopup();
-
-// Realtime fetch script
-
 // API URL and Key
 const url = "https://api-v3.mbta.com/vehicles?filter[route]=Green-B,Green-C,Green-D,Green-E";
 const apiKey = "e825c48397814b85803c564e2a43d990";
@@ -80,3 +64,25 @@ fetch('https://grsylvia.github.io/transit-app/mbta_subway_layer.geojson') // Upd
         }).addTo(map);
     })
     .catch(error => console.error('Error loading GeoJSON:', error));
+
+// Fetch and parse the CSV data from GitHub raw URL
+Papa.parse('https://raw.githubusercontent.com/grsylvia/transit-app/main/stopscsv', {
+    download: true,
+    header: true,
+    complete: function(results) {
+        results.data.forEach(function(station) {
+            const lat = parseFloat(station.stop_lat);
+            const lng = parseFloat(station.stop_lon);
+            const stationName = station.stop_name;
+
+            // Add a dot circle marker for each station
+            L.circleMarker([lat, lng], {
+                radius: 8,  // Circle size
+                color: 'blue',  // Circle color
+                fillColor: 'blue',
+                fillOpacity: 0.5
+            }).addTo(map).bindPopup(stationName);  // Display station name on click
+        });
+    }
+});
+
