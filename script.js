@@ -8,7 +8,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 
 // Define the custom icon
 var customIcon = L.icon({
-  iconUrl: 'https://github.com/grsylvia/transit-app/blob/e7b35463dd837edd06b88abc0240158993fd6199/Icon-mode-subway-default.png', // Replace with your actual raw GitHub icon URL
+  iconUrl: 'https://github.com/grsylvia/transit-app/blob/main/Icon-mode-subway-default.png', // Replace with your actual raw GitHub icon URL
   iconSize: [25, 25], // Size of the icon [width, height]
   iconAnchor: [12, 12], // Anchor point of the icon (centered at the lat/lng position)
   popupAnchor: [0, -12] // Offset the popup to appear above the icon
