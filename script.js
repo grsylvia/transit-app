@@ -6,12 +6,8 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19
 }).addTo(map);
 
-// Define the custom icon
-var customIcon = L.icon({
-  iconUrl: 'https://github.com/grsylvia/transit-app/blob/main/apple-fruit-isolated-on-white-background-photo.jpg', // Replace with your actual raw GitHub icon URL
-});
 
-// Function to load CSV file and add custom icons
+// Function to load CSV file and add circles
 function loadTrainStations(csvData) {
   var stationLayer = L.layerGroup().addTo(map);
 
@@ -19,24 +15,29 @@ function loadTrainStations(csvData) {
     header: true,
     dynamicTyping: true,
     complete: function(results) {
+      console.log("Parsed Data:", results.data);
       results.data.forEach(function(station) {
         var lat = station.stop_lat;
         var lng = station.stop_lon;
-        var name = station.stop_name;
-
         if (!isNaN(lat) && !isNaN(lng)) {
-          // Create a marker with the custom icon and add a popup with the station name
-          L.marker([lat, lng], { icon: customIcon })
-            .addTo(stationLayer)
-            .bindPopup('<b>' + name + '</b>'); // Show the station name in the popup
+          // Create a circle and add it to the layer group
+          L.circle([lat, lng], {
+            color: 'blue', // Outline color
+            fillColor: '#1E90FF', // Fill color
+            fillOpacity: 0.5, // Opacity of the fill
+            radius: 50 // Radius in meters
+          }).addTo(stationLayer);
         }
       });
+    },
+    error: function(error) {
+      console.error("Error parsing CSV:", error);
     }
   });
 }
 
 // GitHub CSV URL
-var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/stops_rapidtransit.csv'; // Replace with your actual raw GitHub CSV URL
+var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/stops_rapidtransit.csv';
 
 fetch(csvUrl)
   .then(response => {
@@ -46,6 +47,7 @@ fetch(csvUrl)
     return response.text();
   })
   .then(data => {
+    console.log("CSV Data:", data); // Debug fetched CSV content
     loadTrainStations(data);
   })
   .catch(error => console.error("Error fetching CSV file:", error));
