@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 }).addTo(map);
 
 // API URL and Key
-const url = "https://api-v3.mbta.com/vehicles";
+const url = "https://api-v3.mbta.com/vehicles?filter[route]=Green-B,Green-C,Green-D,Green-E";
 const apiKey = "e825c48397814b85803c564e2a43d990";
 
 // Function to Fetch and Display Data
@@ -33,17 +33,16 @@ async function fetchAndDisplayVehicles() {
         <b>Status:</b> ${vehicle.attributes.current_status}<br>
         <b>Speed:</b> ${vehicle.attributes.speed || "N/A"} mph
       `;
-      var trainicon = L.icon({iconUrl: 'https://commons.wikimedia.org/wiki/Category:MBTA_icons#/media/File:Icon-mode-subway-default.svg'});
-      L.marker([latitude, longitude], {icon: trainicon}).addTo(map).bindPopup(popupContent);
+      L.marker([latitude, longitude]).addTo(map).bindPopup(popupContent);
     });
   } catch (error) {
     console.error("Error fetching MBTA data:", error);
   }
 }
 
-// Refresh Data Every 15 seconds
+// Refresh Data Every 10 seconds
 fetchAndDisplayVehicles();
-setInterval(fetchAndDisplayVehicles, 15000);
+setInterval(fetchAndDisplayVehicles, 10000);
 
 // Fetch and add the GeoJSON layer
 fetch('https://grsylvia.github.io/transit-app/mbta_subway_layer.geojson') // Update with your hosted file's URL
