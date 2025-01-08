@@ -27,7 +27,7 @@ function loadTrainStations(csvData) {
 }
 
 // Example GitHub CSV URL (raw file)
-var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/main/stops.csv'; // Replace with your actual raw GitHub CSV URL
+var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/stops.csv'; // Replace with your actual raw GitHub CSV URL
 
 fetch(csvUrl)
   .then(response => response.text())
