@@ -19,6 +19,7 @@ function loadTrainStations(csvData) {
       results.data.forEach(function(station) {
         var lat = station.stop_lat;
         var lng = station.stop_lon;
+        var name = station.stop_name;
         if (!isNaN(lat) && !isNaN(lng)) {
           // Create a circle and add it to the layer group
           L.circle([lat, lng], {
@@ -26,7 +27,9 @@ function loadTrainStations(csvData) {
             fillColor: '#1E90FF', // Fill color
             fillOpacity: 0.5, // Opacity of the fill
             radius: 50 // Radius in meters
-          }).addTo(stationLayer);
+          })
+            .bindPopup(name)
+            .addTo(stationLayer);
         }
       });
     },
