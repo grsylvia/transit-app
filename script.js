@@ -9,9 +9,6 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 // Define the custom icon
 var customIcon = L.icon({
   iconUrl: 'https://github.com/grsylvia/transit-app/blob/main/apple-fruit-isolated-on-white-background-photo.jpg', // Replace with your actual raw GitHub icon URL
-  iconSize: [25, 25], // Size of the icon [width, height]
-  iconAnchor: [12, 12], // Anchor point of the icon (centered at the lat/lng position)
-  popupAnchor: [0, -12] // Offset the popup to appear above the icon
 });
 
 // Function to load CSV file and add custom icons
