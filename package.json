@@ -1,12 +1,14 @@
 {
-  "name": "transit-app-Mobile",
+  "name": "NeverLate",
+  "version": "1.0.0",
+  "description": "Interactive web app for transit schedules and headways",
+  "scripts": {
+    "build": "mkdir dist && cp index.html style.css script.js dist",
+    "start": "http-server dist"
+  },
   "dependencies": {
     "@capacitor/android": "^6.2.0",
     "@capacitor/cli": "^6.2.0",
     "@capacitor/core": "^6.2.0"
-  },
-  "scripts": {
-    "build": "cp -r . dist",
-    "start": "lite-server"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "appId": "com.yourname.neverlate",
-  "appName": "NeverLate",
-  "webDir": "www",
-  "bundledWebRuntime": false
-}
+    "appId": "com.example.transitapp",
+    "appName": "Transit App",
+    "webDir": "dist",
+    "bundledWebRuntime": false
+  }
