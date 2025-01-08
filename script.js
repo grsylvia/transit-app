@@ -54,6 +54,6 @@ async function fetchAndDisplayVehicles() {
   }
 }
 
-// Refresh Data Every 15 Seconds
+// Refresh Data Every 2 mins
 fetchAndDisplayVehicles();
-setInterval(fetchAndDisplayVehicles, 15000);
+setInterval(fetchAndDisplayVehicles, 120000);
