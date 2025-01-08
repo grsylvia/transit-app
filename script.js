@@ -77,7 +77,7 @@ Papa.parse('https://raw.githubusercontent.com/grsylvia/transit-app/main/stops.cs
 
             // Add a dot circle marker for each station
             L.circleMarker([lat, lng], {
-                radius: 8,  // Circle size
+                radius: 100,  // Circle size
                 color: 'blue',  // Circle color
                 fillColor: 'blue',
                 fillOpacity: 0.5
