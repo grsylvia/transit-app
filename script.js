@@ -53,7 +53,7 @@ fetch(csvUrl)
   .catch(error => console.error("Error fetching CSV file:", error));
 
 // API URL and Key
-const url = "https://api-v3.mbta.com/vehicles?filter[route]=Blue,Green-B,Green-C,Green-D,Green-E,Orange,Red";
+const url = "https://api-v3.mbta.com/vehicles?filter%5Broute%5D=Blue,Green-B,Green-C,Green-D,Green-E,Orange,Red";
 const apiKey = "e825c48397814b85803c564e2a43d990";
 
 // Function to Fetch and Display Data
