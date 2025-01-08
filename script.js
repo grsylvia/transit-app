@@ -18,3 +18,18 @@ const circle = L.circle([42.33129, -71.12641], {
     radius: 100
 }).addTo(map);
 circle.bindPopup("Brookline Hills").openPopup();
+
+const geojsonUrl = "https://raw.githubusercontent.com/grsylvia/transit-app/main/path-to/mbta_subway_layer.geojson";
+
+fetch(geojsonUrl)
+  .then(response => response.json())
+  .then(data => {
+    L.geoJSON(data).addTo(map);
+  })
+  .catch(err => console.error(err));
+
+
+
+
+
+
