@@ -42,7 +42,7 @@ async function fetchAndDisplayVehicles() {
 
 // Refresh Data Every 10 seconds
 fetchAndDisplayVehicles();
-setInterval(fetchAndDisplayVehicles, 10000);
+setInterval(fetchAndDisplayVehicles, 5000);
 
 // Fetch and add the GeoJSON layer
 fetch('https://grsylvia.github.io/transit-app/mbta_subway_layer.geojson') // Update with your hosted file's URL
@@ -64,25 +64,3 @@ fetch('https://grsylvia.github.io/transit-app/mbta_subway_layer.geojson') // Upd
         }).addTo(map);
     })
     .catch(error => console.error('Error loading GeoJSON:', error));
-
-// Fetch and parse the CSV data from GitHub raw URL
-Papa.parse('https://raw.githubusercontent.com/grsylvia/transit-app/main/stops.csv', {
-    download: true,
-    header: true,
-    complete: function(results) {
-        results.data.forEach(function(station) {
-            const lat = parseFloat(station.stop_lat);
-            const lng = parseFloat(station.stop_lon);
-            const stationName = station.stop_name;
-
-            // Add a dot circle marker for each station
-            L.circleMarker([lat, lng], {
-                radius: 100,  // Circle size
-                color: 'blue',  // Circle color
-                fillColor: 'blue',
-                fillOpacity: 0.5
-            }).addTo(map).bindPopup(stationName);  // Display station name on click
-        });
-    }
-});
-
