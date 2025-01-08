@@ -16,7 +16,7 @@ circle.bindPopup("Brookline Hills").openPopup();
 
 // API URL and Key
 const url = "https://api-v3.mbta.com/vehicles";
-const apiKey = "your_api_key_here"; // Replace with your MBTA API key
+const apiKey = "e825c48397814b85803c564e2a43d990"; // Replace with your MBTA API key
 
 // Initialize the Leaflet Map
 const map = L.map("map").setView([42.3601, -71.0589], 12); // Centered on Boston
