@@ -8,30 +8,44 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 
 // Function to load CSV file and add markers
 function loadTrainStations(csvData) {
-  var stationLayer = L.layerGroup().addTo(map); // Create a layer group to hold all markers
+  var stationLayer = L.layerGroup().addTo(map);
 
-  // Parse CSV
   Papa.parse(csvData, {
+    header: true,
+    dynamicTyping: true,
     complete: function(results) {
+      console.log("Parsed Data:", results.data);
       results.data.forEach(function(station) {
-        var lat = parseFloat(station.stop_lat); // Use 'stop_lat' for latitude
-        var lng = parseFloat(station.stop_lon); // Use 'stop_lon' for longitude
+        console.log("Station Row:", station);
+        var lat = station.stop_lat;
+        var lng = station.stop_lon;
         if (!isNaN(lat) && !isNaN(lng)) {
-          // Create a marker and add it to the layer group
           L.marker([lat, lng]).addTo(stationLayer)
-            .bindPopup('<b>' + station.stop_name + '</b>'); // Use 'stop_name' for the popup
+            .bindPopup('<b>' + station.stop_name + '</b>');
         }
       });
+    },
+    error: function(error) {
+      console.error("Error parsing CSV:", error);
     }
   });
 }
 
-// Example GitHub CSV URL (raw file)
-var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/stops.csv'; // Replace with your actual raw GitHub CSV URL
+// GitHub CSV URL
+var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/stops.csv';
 
 fetch(csvUrl)
-  .then(response => response.text())
-  .then(data => loadTrainStations(data));
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok: " + response.statusText);
+    }
+    return response.text();
+  })
+  .then(data => {
+    console.log("CSV Data:", data); // Debug fetched CSV content
+    loadTrainStations(data);
+  })
+  .catch(error => console.error("Error fetching CSV file:", error));
 
 
 // API URL and Key
