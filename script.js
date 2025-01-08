@@ -6,7 +6,15 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19
 }).addTo(map);
 
-// Function to load CSV file and add circles
+// Define the custom icon
+var customIcon = L.icon({
+  iconUrl: 'https://github.com/grsylvia/transit-app/blob/e7b35463dd837edd06b88abc0240158993fd6199/Icon-mode-subway-default.png', // Replace with your actual raw GitHub icon URL
+  iconSize: [25, 25], // Size of the icon [width, height]
+  iconAnchor: [12, 12], // Anchor point of the icon (centered at the lat/lng position)
+  popupAnchor: [0, -12] // Offset the popup to appear above the icon
+});
+
+// Function to load CSV file and add custom icons
 function loadTrainStations(csvData) {
   var stationLayer = L.layerGroup().addTo(map);
 
@@ -14,29 +22,24 @@ function loadTrainStations(csvData) {
     header: true,
     dynamicTyping: true,
     complete: function(results) {
-      console.log("Parsed Data:", results.data);
       results.data.forEach(function(station) {
         var lat = station.stop_lat;
         var lng = station.stop_lon;
+        var name = station.stop_name;
+
         if (!isNaN(lat) && !isNaN(lng)) {
-          // Create a circle and add it to the layer group
-          L.circle([lat, lng], {
-            color: 'blue', // Outline color
-            fillColor: '#1E90FF', // Fill color
-            fillOpacity: 0.5, // Opacity of the fill
-            radius: 100 // Radius in meters
-          }).addTo(stationLayer);
+          // Create a marker with the custom icon and add a popup with the station name
+          L.marker([lat, lng], { icon: customIcon })
+            .addTo(stationLayer)
+            .bindPopup('<b>' + name + '</b>'); // Show the station name in the popup
         }
       });
-    },
-    error: function(error) {
-      console.error("Error parsing CSV:", error);
     }
   });
 }
 
 // GitHub CSV URL
-var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/stops_rapidtransit.csv';
+var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/stops_rapidtransit.csv'; // Replace with your actual raw GitHub CSV URL
 
 fetch(csvUrl)
   .then(response => {
@@ -46,11 +49,9 @@ fetch(csvUrl)
     return response.text();
   })
   .then(data => {
-    console.log("CSV Data:", data); // Debug fetched CSV content
     loadTrainStations(data);
   })
   .catch(error => console.error("Error fetching CSV file:", error));
-
 
 // API URL and Key
 const url = "https://api-v3.mbta.com/vehicles?filter[route]=Green-B,Green-C,Green-D,Green-E";
