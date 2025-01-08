@@ -23,7 +23,7 @@ circle.bindPopup("Brookline Hills").openPopup();
 // Realtime fetch script
 
 // API URL and Key
-const url = "https://api-v3.mbta.com/vehicles?filter[route_type]=0,1";
+const url = "https://api-v3.mbta.com/vehicles?filter[route]=Green-B,Green-C,Green-D,Green-E";
 const apiKey = "e825c48397814b85803c564e2a43d990";
 
 // Function to Fetch and Display Data
