@@ -1,0 +1,6 @@
+{
+  "appId": "com.yourname.neverlate",
+  "appName": "NeverLate",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
