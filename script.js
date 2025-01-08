@@ -6,6 +6,34 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19
 }).addTo(map);
 
+// Function to load CSV file and add markers
+function loadTrainStations(csvData) {
+  var stationLayer = L.layerGroup().addTo(map); // Create a layer group to hold all markers
+
+  // Parse CSV
+  Papa.parse(csvData, {
+    complete: function(results) {
+      results.data.forEach(function(station) {
+        var lat = parseFloat(station.stop_lat); // Use 'stop_lat' for latitude
+        var lng = parseFloat(station.stop_lon); // Use 'stop_lon' for longitude
+        if (!isNaN(lat) && !isNaN(lng)) {
+          // Create a marker and add it to the layer group
+          L.marker([lat, lng]).addTo(stationLayer)
+            .bindPopup('<b>' + station.stop_name + '</b>'); // Use 'stop_name' for the popup
+        }
+      });
+    }
+  });
+}
+
+// Example GitHub CSV URL (raw file)
+var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/main/stops.csv'; // Replace with your actual raw GitHub CSV URL
+
+fetch(csvUrl)
+  .then(response => response.text())
+  .then(data => loadTrainStations(data));
+
+
 // API URL and Key
 const url = "https://api-v3.mbta.com/vehicles?filter[route]=Green-B,Green-C,Green-D,Green-E";
 const apiKey = "e825c48397814b85803c564e2a43d990";
@@ -40,7 +68,7 @@ async function fetchAndDisplayVehicles() {
   }
 }
 
-// Refresh Data Every 10 seconds
+// Refresh Data Every 5 seconds
 fetchAndDisplayVehicles();
 setInterval(fetchAndDisplayVehicles, 5000);
 
