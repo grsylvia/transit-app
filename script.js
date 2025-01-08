@@ -6,7 +6,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19
 }).addTo(map);
 
-// Function to load CSV file and add markers
+// Function to load CSV file and add circles
 function loadTrainStations(csvData) {
   var stationLayer = L.layerGroup().addTo(map);
 
@@ -16,12 +16,16 @@ function loadTrainStations(csvData) {
     complete: function(results) {
       console.log("Parsed Data:", results.data);
       results.data.forEach(function(station) {
-        console.log("Station Row:", station);
         var lat = station.stop_lat;
         var lng = station.stop_lon;
         if (!isNaN(lat) && !isNaN(lng)) {
-          L.marker([lat, lng]).addTo(stationLayer)
-            .bindPopup('<b>' + station.stop_name + '</b>');
+          // Create a circle and add it to the layer group
+          L.circle([lat, lng], {
+            color: 'blue', // Outline color
+            fillColor: '#1E90FF', // Fill color
+            fillOpacity: 0.5, // Opacity of the fill
+            radius: 100 // Radius in meters
+          }).addTo(stationLayer);
         }
       });
     },
