@@ -66,7 +66,7 @@ fetch('https://grsylvia.github.io/transit-app/mbta_subway_layer.geojson') // Upd
     .catch(error => console.error('Error loading GeoJSON:', error));
 
 // Fetch and parse the CSV data from GitHub raw URL
-Papa.parse('https://raw.githubusercontent.com/grsylvia/transit-app/main/stopscsv', {
+Papa.parse('https://raw.githubusercontent.com/grsylvia/transit-app/main/stops.csv', {
     download: true,
     header: true,
     complete: function(results) {
