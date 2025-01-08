@@ -1,13 +1,14 @@
 const map = L.map('map').setView([42.361, -71.057], 13);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© OpenStreetMap contributors'
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
 }).addTo(map);
 
 // Define the custom icon
 var customIcon = L.icon({
-  iconUrl: 'https://github.com/grsylvia/transit-app/blob/main/Icon-mode-subway-default.png', // Replace with your actual raw GitHub icon URL
+  iconUrl: 'https://github.com/grsylvia/transit-app/blob/main/apple-fruit-isolated-on-white-background-photo.jpg', // Replace with your actual raw GitHub icon URL
   iconSize: [25, 25], // Size of the icon [width, height]
   iconAnchor: [12, 12], // Anchor point of the icon (centered at the lat/lng position)
   popupAnchor: [0, -12] // Offset the popup to appear above the icon
