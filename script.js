@@ -57,9 +57,9 @@ async function fetchAndDisplayVehicles() {
   }
 }
 
-// Refresh Data Every 2 mins
+// Refresh Data Every 15 seconds
 fetchAndDisplayVehicles();
-setInterval(fetchAndDisplayVehicles, 120000);
+setInterval(fetchAndDisplayVehicles, 15000);
 
 // Fetch and add the GeoJSON layer
 fetch('https://grsylvia.github.io/transit-app/mbta_subway_layer.geojson') // Update with your hosted file's URL
