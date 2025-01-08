@@ -21,14 +21,27 @@ const circle = L.circle([42.33129, -71.12641], {
 }).addTo(map);
 circle.bindPopup("Brookline Hills").openPopup();
 
-const geojsonUrl = "https://raw.githubusercontent.com/grsylvia/transit-app/main/path-to/mbta_subway_layer.geojson";
+// Fetch and add the GeoJSON layer
+fetch('https://grsylvia.github.io/transit-app/mbta_subway_layer.geojson') // Update with your hosted file's URL
+    .then(response => response.json())
+    .then(data => {
+        L.geoJSON(data, {
+            style: function (feature) {
+                return {
+                    color: "purple",
+                    weight: 2,
+                    opacity: 0.8
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                if (feature.properties && feature.properties.name) {
+                    layer.bindPopup(`Subway Line: ${feature.properties.name}`);
+                }
+            }
+        }).addTo(map);
+    })
+    .catch(error => console.error('Error loading GeoJSON:', error));
 
-fetch(geojsonUrl)
-  .then(response => response.json())
-  .then(data => {
-    L.geoJSON(data).addTo(map);
-  })
-  .catch(err => console.error(err));
 
 
 
