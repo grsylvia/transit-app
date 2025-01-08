@@ -6,11 +6,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     maxZoom: 19
 }).addTo(map);
 
-var mbtaicon = L.icon({
-    iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/64/MBTA.svg',
-    iconSize: [10, 10]
-});
-
+var mbtaicon = L.icon({iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/64/MBTA.svg', iconSize: [10, 10]});
 L.marker([42.33129, -71.12641], {icon: mbtaicon}).addTo(map);
 
 const circle = L.circle([42.33129, -71.12641], {
@@ -50,7 +46,8 @@ async function fetchAndDisplayVehicles() {
         <b>Status:</b> ${vehicle.attributes.current_status}<br>
         <b>Speed:</b> ${vehicle.attributes.speed || "N/A"} mph
       `;
-      L.marker([latitude, longitude]).addTo(map).bindPopup(popupContent);
+      var trainicon = L.icon({iconUrl: 'https://commons.wikimedia.org/wiki/Category:MBTA_icons#/media/File:Icon-mode-subway-default.svg'});
+      L.marker([latitude, longitude], {icon: trainicon}).addTo(map).bindPopup(popupContent);
     });
   } catch (error) {
     console.error("Error fetching MBTA data:", error);
