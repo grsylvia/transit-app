@@ -97,9 +97,9 @@ fetch('https://grsylvia.github.io/transit-app/mbta_subway_layer.geojson') // Upd
         L.geoJSON(data, {
             style: function (feature) {
                 return {
-                    color: "purple",
-                    weight: 2,
-                    opacity: 0.8
+                    color: "green",
+                    weight: 3,
+                    opacity: 1.0
                 };
             },
             onEachFeature: function (feature, layer) {
