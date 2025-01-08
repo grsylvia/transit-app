@@ -46,7 +46,7 @@ async function fetchAndDisplayVehicles() {
         <b>Status:</b> ${vehicle.attributes.current_status}<br>
         <b>Speed:</b> ${vehicle.attributes.speed || "N/A"} mph
       `;
-      var trainicon = L.icon({iconUrl: 'https://commons.wikimedia.org/wiki/Category:MBTA_icons#/media/File:Icon-mode-subway-default.svg'});
+      var trainicon = L.icon({iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/bf/Icon-mode-subway-default.svg'});
       L.marker([latitude, longitude], {icon: trainicon}).addTo(map).bindPopup(popupContent);
     });
   } catch (error) {
