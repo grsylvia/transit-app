@@ -1,0 +1,6 @@
+{
+    "appId": "com.example.transitapp",
+    "appName": "Transit App",
+    "webDir": "dist",
+    "bundledWebRuntime": false
+  }
