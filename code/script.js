@@ -40,7 +40,7 @@ function loadTrainStations(csvData) {
 }
 
 // GitHub CSV URL
-var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/stops_rapidtransit.csv';
+var csvUrl = 'https://raw.githubusercontent.com/grsylvia/transit-app/refs/heads/main/data/stops_rapidtransit.csv';
 
 fetch(csvUrl)
   .then(response => {
@@ -94,7 +94,7 @@ fetchAndDisplayVehicles();
 setInterval(fetchAndDisplayVehicles, 5000);
 
 // Fetch and add the GeoJSON layer
-fetch('https://grsylvia.github.io/transit-app/mbta_subway_layer.geojson') // Update with your hosted file's URL
+fetch('https://grsylvia.github.io/transit-app/gis/mbta_subway_layer.geojson') // Update with your hosted file's URL
     .then(response => response.json())
     .then(data => {
         L.geoJSON(data, {
